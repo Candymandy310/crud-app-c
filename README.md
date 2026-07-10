@@ -1,2 +1,5 @@
-# crud-app-c
-My first full-on program in C with file handling. It has options to create, alter, view and delete data stored in structures in C
+# Basic CRUD Implementation using C
+My first full-on program in C after learning the basics.
+It has options to create, read, update and delete data stored in a text file (in binary).
+This program uses structures in C for this functionality.
+The records can be entered manually, all of which will then be stored in a basic text file in the cwd.
