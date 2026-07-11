@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 struct employee
 {
@@ -16,10 +17,10 @@ int main()
     int choice;
     char c = 'Y';
     printf("===============================================================\n");
-    printf("EMPLOYEE RECORD MANAGEMENT SYSTEM USING C\n\n");
+    printf("EMPLOYEE RECORD MANAGEMENT SYSTEM USING C");
     while (1)
     {
-        printf("FUNCTIONS : \n");
+        printf("\n\nFUNCTIONS : \n");
         printf("1. Add Data\n");
         printf("2. Modify Data\n");
         printf("3. Delete Data\n");
@@ -49,7 +50,7 @@ int main()
                     fwrite(&e, sizeof(e), 1, fp);
                     printf("Record added...\n");
                     printf("Do you want to add another record? (Y/N) : ");
-                    c = getche();
+                    scanf(" %c", &c);
                 }
                 fclose(fp);
                 break;
@@ -57,14 +58,14 @@ int main()
                 printf("\n\n---VIEWING RECORDS---\n\n");
                 fp = fopen("Employee_Rec.txt", "rb");
                 rewind(fp);
-                printf("--------------------------------------------------------\n");
-                printf("| %31s | %3s | %11s | %31s | %8s |\n", "NAME", "AGE", "PHONE NO", "EMAIL", "SALARY");
-                printf("--------------------------------------------------------\n");
+                printf("----------------------------------------------------------------------------------------\n");
+                printf("| %25s | %3s | %11s | %25s | %8s |\n", "NAME", "AGE", "PHONE NO", "EMAIL", "SALARY");
+                printf("----------------------------------------------------------------------------------------\n");
                 while (fread(&e, sizeof(e), 1, fp) == 1)
                 {
-                    printf("| %31s | %3d | %11s | %31s | %8.2f |\n", e.name, e.age, e.phno, e.email, e.salary);
+                    printf("| %25s | %3d | %11s | %25s | %8.2f |\n", e.name, e.age, e.phno, e.email, e.salary);
                 }
-                printf("--------------------------------------------------------\n");
+                printf("----------------------------------------------------------------------------------------\n");
                 fclose(fp);
                 break;
             case 5:
