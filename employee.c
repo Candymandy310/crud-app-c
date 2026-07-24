@@ -30,6 +30,7 @@ int main()
         printf("2. Modify Data\n");
         printf("3. Delete Data\n");
         printf("4. View Data\n");
+        //printf(" Search Data\n");
         printf("5. Exit\n\n");
         printf("Enter your choice (1, 2, 3, 4, 5) : ");
         scanf("%d", &choice);
@@ -95,18 +96,39 @@ int main()
                 remove("Employee_Rec.txt");
                 rename("temp.txt", "Employee_Rec.txt");
                 break;
+            case 3:
+                printf("\n\n---DELETING RECORDS---\n\n");
+                fp = fopen("Employee_Rec.txt", "rb");
+                fpt = fopen("temp.txt", "wb");
+                printf("Enter the Employee ID of the record you want to delete : ");
+                scanf(" %[^\n]", id);
+                while (fread(&e, sizeof(e), 1, fp) == 1)
+                {
+                    if (strcmp(e.eid, id) == 0)
+                    {
+                        printf("\nMatching ID found...\n");
+                        printf("\nRecord deleted...\n");
+                        continue;
+                    }
+                    fwrite(&e, sizeof(e), 1, fpt);   
+                }
+                fclose(fp);
+                fclose(fpt);
+                remove("Employee_Rec.txt");
+                rename("temp.txt", "Employee_Rec.txt");
+                break;
             case 4:
                 printf("\n\n---VIEWING RECORDS---\n\n");
                 fp = fopen("Employee_Rec.txt", "rb");
                 rewind(fp);
-                printf("----------------------------------------------------------------------------------------\n");
+                printf("-----------------------------------------------------------------------------------------------\n");
                 printf("| %5s | %25s | %3s | %11s | %25s | %8s |\n", "ID", "NAME", "AGE", "PHONE NO", "EMAIL", "SALARY");
-                printf("----------------------------------------------------------------------------------------\n");
+                printf("-----------------------------------------------------------------------------------------------\n");
                 while (fread(&e, sizeof(e), 1, fp) == 1)
                 {
                     printf("| %5s | %25s | %3d | %11s | %25s | %8.2f |\n", e.eid, e.ename, e.eage, e.ephno, e.eemail, e.esalary);
                 }
-                printf("----------------------------------------------------------------------------------------\n");
+                printf("-----------------------------------------------------------------------------------------------\n");
                 fclose(fp);
                 break;
             case 5:
